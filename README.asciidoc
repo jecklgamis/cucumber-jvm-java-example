@@ -1,4 +1,4 @@
-# Cucumber JVM Java Example image:https://travis-ci.org/jecklgamis/cucumber-jvm-scala-example.svg?branch=master["Build Status", link="https://travis-ci.org/jecklgamis/cucumber-jvm-java-example"]
+# Cucumber JVM Java Example image:https://travis-ci.org/jecklgamis/cucumber-jvm-java-example.svg?branch=master["Build Status", link="https://travis-ci.org/jecklgamis/cucumber-jvm-java-example"]
 
 About
 -----
@@ -7,7 +7,7 @@ This is an example Cucumber-JVM project.
 
 * Uses Java 8 lambda step definitions
 * Packages tests into executable jar file
-* Guice Dependency Injection
+* Guice dependency injection
 
 Getting Started
 ---------------
@@ -20,7 +20,7 @@ Essential Elements
 
 * Feature files - contains the BDD feature definitions (Gherkin, e.g. `Example.feature`)
 * Step definitions - Implementation of the step definitions (Java, e.g. `ExampleSteps.java`)
-* CucumberTestMain - this is the program entry point when tests are packaged as executable jar file (e.g. target/cucumber-jvm-scala-example.jar)
+* CucumberTestMain - this is the program entry point when tests are packaged as executable jar file (e.g. target/cucumber-jvm-java-example.jar)
 * Test runners - run specific feature set ( Java with Junit annotations, e.g. `ExampleTestRunner.java`). This is only used when developing tests.
 
 Creating Tests
@@ -51,8 +51,8 @@ Creating Test Runner
 ~~~~~~~~~~~~~~~~~~~~
 See the example below and change the appropriate values of the CucumberOptions annotation.
 
+.ExampleTestRunner.java
 ----
-
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"classpath:features/Example.feature"},
@@ -70,7 +70,7 @@ ANDing, NEGating, and ORing Cucumber Tags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * `~` negates a tag
 * Comma separated tags are ORed (example `tags = {"@FeatureSet1,@FeatureSet2"}` means run both feature sets)
-* Separated tags are ANDed (example `tags = {"~@Wip","@FeatureSet1"{` means run `@FeatureSet1` but not those tagged with `@Wip`)
+* Separated tags are ANDed (example `tags = {"~@Wip","@FeatureSet1"}` means run `@FeatureSet1` but not those tagged with `@Wip`)
 
 Implementing Steps/Glue
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,6 +79,18 @@ After you created the feature files, run the test runner, it will give you hints
 
 Example (`ExampleSteps.java`)
 ----
+package steps;
+
+import com.google.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cucumber.api.Scenario;
+import cucumber.api.java8.En;
+import util.TestContext;
+import util.UrlReaderService;
+
 public class ExampleSteps implements En {
     private static final Logger log = LoggerFactory.getLogger(ExampleSteps.class);
 
@@ -124,6 +136,45 @@ public class ExampleSteps implements En {
 }
 ----
 
+Dependency Injection
+~~~~~~~~~~~~~~~~~~~~
+The `ExampleSteps` has two dependencies: `UrlReaderService` and `TestContext`.
+These are automatically injected by Guice when it instantiates the steps for each scenario.
+Furthermore, `UrlReaderService` depends on an HTTP client (standard JAX RS Client in this case).
+That client to an instance of Jersey client in `ExampleTestModule`
+
+.ExampleTestModule.java
+----
+class ExampleTestModule extends AbstractModule {
+    @Override
+    protected void configure() {
+        bind(Client.class).toInstance(JerseyClientBuilder.createClient());
+    }
+}
+----
+The module (and possibly with other modules you define), is used to create the Guice injector in
+`ExampleInjectorSource`.
+
+.ExampleInjectorSource.java
+----
+public class ExampleInjectorSource implements InjectorSource {
+    @Override
+    public Injector getInjector() {
+        return Guice.createInjector(Stage.PRODUCTION, CucumberModules.SCENARIO, new ExampleTestModule());
+    }
+}
+----
+
+The Cucumber runtime uses `cucumber.properties` in the resource path to locate this `ExampleInjectorSource`
+
+.cucumber.properties
+----
+guice.injector-source=util.ExampleInjectorSource
+----
+
+The `TestContext` is just an abstraction of states  you need to pass around during steps. This is
+a simple thread local map.
+
 Running Cucumber Tests in CLI
 -----------------------------
 
@@ -147,18 +198,17 @@ mvn exec:java -Dcucumber.options="--plugin pretty --plugin html:cucumber/html --
 
 The above command line examples generate reports in `cucumber/html` and in  `cucumber/json` directories
 
+The `run-all-tests-using-jar.sh` and `run-all-tests-using-plugin.sh` wraps
+these commands.
+
 Running Cucumber Tests in IDE (Intellij IDEA)
 ---------------------------------------------
 In the `Run/Debug Configuration` , add the steps directories (in this example, `steps`) in the `Glue` text field.
-
-Sharing State In Steps
-----------------------
-* A number of options here, instance variables, thread local map, or containers
 
 Links
 -----
 * https://cucumber.io/docs
 * http://github.com/cucumber/cucumber-jvm
-
+* https://github.com/google/guice
 
 
