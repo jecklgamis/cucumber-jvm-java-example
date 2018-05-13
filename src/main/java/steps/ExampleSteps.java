@@ -1,25 +1,18 @@
 package steps;
 
 import com.google.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import cucumber.api.Scenario;
 import cucumber.api.java8.En;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.TestContext;
-import util.UrlReaderService;
 
 public class ExampleSteps implements En {
     private static final Logger log = LoggerFactory.getLogger(ExampleSteps.class);
-
     TestContext testContext;
 
-    UrlReaderService urlReaderService;
-
     @Inject
-    public ExampleSteps(UrlReaderService urlReaderService, TestContext testContext) {
-        this.urlReaderService = urlReaderService;
+    public ExampleSteps(TestContext testContext) {
         this.testContext = testContext;
         configureSteps();
     }

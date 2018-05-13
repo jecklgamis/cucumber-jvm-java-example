@@ -5,12 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TestContext {
-    ThreadLocal<Map<String, Object>> context = new ThreadLocal<Map<String, Object>>() {
-        @Override
-        protected Map<String, Object> initialValue() {
-            return new HashMap();
-        }
-    };
+    ThreadLocal<Map<String, Object>> context = ThreadLocal.withInitial(() -> new HashMap());
 
     public void put(String key, Object value) {
         context.get().put(key, value);
