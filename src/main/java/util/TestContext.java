@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TestContext {
-    ThreadLocal<Map<String, Object>> context = ThreadLocal.withInitial(() -> new HashMap());
+    private ThreadLocal<Map<String, Object>> context = ThreadLocal.withInitial(() -> new HashMap());
 
     public void put(String key, Object value) {
         context.get().put(key, value);
