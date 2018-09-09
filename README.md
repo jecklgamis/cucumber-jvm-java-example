@@ -1,5 +1,7 @@
 ## cucumber-jvm-java-example
 
+[![Build Status](https://travis-ci.org/jecklgamis/cucumber-jvm-java-example.svg?branch=master)](https://travis-ci.org/jecklgamis/cucumber-jvm-java-example)
+
 This is an example Cucumber-JVM project.
 
 * Uses Java 8 lambda step definitions
