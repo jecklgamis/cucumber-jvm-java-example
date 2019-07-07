@@ -29,6 +29,18 @@ mvn test -Dtest=ExampleFeatureTest
 In Intellij, you can also run the scenario directly from the feature file. Ensure you have the Cucumber Java 
 plugin installed.
 
+## Example Target Apps
+
+Dropwizard Apps:
+* https://github.com/jecklgamis/dropwizard-java-example
+* https://github.com/jecklgamis/dropwizard-kotlin-example
+* https://github.com/jecklgamis/dropwizard-scala-example
+
+Spring Boot Apps:
+* https://github.com/jecklgamis/spring-boot-java-example
+* https://github.com/jecklgamis/spring-boot-kotlin-example
+* https://github.com/jecklgamis/spring-boot-scala-example
+
 ## Links
 
 * https://cucumber.io/docs
