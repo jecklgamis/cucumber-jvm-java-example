@@ -1,10 +1,12 @@
 package steps;
 
-import com.google.inject.Inject;
-import cucumber.api.Scenario;
-import cucumber.api.java8.En;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.inject.Inject;
+
+import io.cucumber.core.api.Scenario;
+import io.cucumber.java8.En;
 import util.TestContext;
 
 public class ExampleSteps implements En {
