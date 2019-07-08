@@ -13,12 +13,12 @@ This is an example Cucumber-JVM project.
 Using executable jar file:
 ```
 mvn clean package
-java -jar target/cucumber-jvm-java-example.jar --plugin pretty --plugin html:cucumber/html --json json:cucumber/json/cucumber.json  --glue steps classpath:features --tags ~@Wip
+java -jar target/cucumber-jvm-java-example.jar --plugin pretty --plugin html:cucumber/html --plugin json:cucumber/json/cucumber.json  --glue steps classpath:features --tags ~@Wip
 ```
 
 Using Maven exec plugin:
 ```
-mvn exec:java -Dcucumber.options="--plugin pretty --plugin html:cucumber/html --plugin json:cucumber/json/cucumber.json --tags ~@Wip --tags @ExampleFeature"
+mvn exec:java -Dcucumber.options="--plugin pretty --plugin html:cucumber/html --plugin json:cucumber/json/cucumber.json --glue steps classpath:features --tags ~@Wip --tags @ExampleFeature"
 ```
 
 Using JUnit test runner:
