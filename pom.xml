@@ -10,14 +10,14 @@
     <packaging>jar</packaging>
 
     <properties>
-        <cucumber.version>4.5.2</cucumber.version>
+        <cucumber.version>4.7.4</cucumber.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-guice</artifactId>
-            <version>4.5.2</version>
+            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -106,7 +106,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>cucumber.api.cli.Main</mainClass>
+                                    <mainClass>io.cucumber.core.cli.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -132,7 +132,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>cucumber.api.cli.Main</mainClass>
+                    <mainClass>io.cucumber.core.cli.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
