@@ -11,20 +11,41 @@ This is an example Cucumber-JVM project.
 ## Running Cucumber Tests
 
 Using executable jar file:
-```
+```shell script
 mvn clean package
 java -jar target/cucumber-jvm-java-example.jar --plugin pretty --plugin html:cucumber/html --plugin json:cucumber/json/cucumber.json  --glue steps classpath:features --tags ~@Wip
 ```
 
 Using Maven exec plugin:
-```
+```shell script
 mvn exec:java -Dcucumber.options="--plugin pretty --plugin html:cucumber/html --plugin json:cucumber/json/cucumber.json --glue steps classpath:features --tags ~@Wip --tags @ExampleFeature"
 ```
 
 Using JUnit test runner:
-```
+```shell script
 mvn test -Dtest=ExampleFeatureTest
 ```
+
+Using Docker:
+
+Build Docker image (see `build-docker-image.sh`)
+```shell script
+IMAGE_NAME=jecklgamis/cucumber-jvm-java-example
+IMAGE_TAG=latest
+docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+```
+
+Run Docker image (see `run-all-tests-using-docker.sh`)
+```shell script
+IMAGE_NAME=jecklgamis/cucumber-jvm-java-example
+IMAGE_TAG=latest
+
+JAVA_OPTS=${JAVA_OPTS:-""}
+ARGS=${ARGS:-"--plugin pretty --plugin html:cucumber/html --plugin json:cucumber/json/cucumber.json --glue steps classpath:features --tags @ExampleFeature"}
+
+docker run -e "JAVA_OPTS=${JAVA_OPTS}" -e "ARGS=${ARGS}" ${IMAGE_NAME}:${IMAGE_TAG}
+```
+
 
 In Intellij, you can also run the scenario directly from the feature file. Ensure you have the Cucumber Java 
 plugin installed.
@@ -33,18 +54,6 @@ plugin installed.
 
 * https://github.com/jecklgamis/cucumber-jvm-kotlin-example
 * https://github.com/jecklgamis/cucumber-jvm-scala-example
-
-## Example Target Apps
-
-Dropwizard Apps:
-* https://github.com/jecklgamis/dropwizard-java-example
-* https://github.com/jecklgamis/dropwizard-kotlin-example
-* https://github.com/jecklgamis/dropwizard-scala-example
-
-Spring Boot Apps:
-* https://github.com/jecklgamis/spring-boot-java-example
-* https://github.com/jecklgamis/spring-boot-kotlin-example
-* https://github.com/jecklgamis/spring-boot-scala-example
 
 ## Links
 

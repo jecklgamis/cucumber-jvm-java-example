@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <cucumber.version>4.7.4</cucumber.version>
+        <cucumber.version>6.1.1</cucumber.version>
     </properties>
 
     <dependencies>
