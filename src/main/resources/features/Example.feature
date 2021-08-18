@@ -3,7 +3,7 @@ Feature: Example feature
   @ExampleFeature
   Scenario: Example scenario
     Given this pre condition
-    And this pre condition
+    And that pre condition
     When I do this
     And I do that
     Then I can verify that
