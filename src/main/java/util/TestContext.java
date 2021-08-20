@@ -5,15 +5,14 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TestContext {
-    private ThreadLocal<Map<String, Object>> context = ThreadLocal.withInitial(() -> new HashMap());
+    private Map<String, Object> context = new HashMap<>();
 
     public void put(String key, Object value) {
-        context.get().put(key, value);
+        context.put(key, value);
     }
 
     public Optional<Object> get(String key) {
-        Map map = context.get();
-        return map.containsKey(key) ? Optional.of(map.get(key)) : Optional.empty();
+        return context.containsKey(key) ? Optional.of(context.get(key)) : Optional.empty();
     }
 
 }

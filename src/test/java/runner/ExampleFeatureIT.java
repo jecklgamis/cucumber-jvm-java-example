@@ -6,10 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"classpath:features/Example.feature"},
+        features = {"classpath:features"},
         tags = "not @Wip",
         glue = {"classpath:steps"},
         plugin = {"pretty", "html:target/cucumber/html"})
-public class ExampleFeatureTest {
+public class ExampleFeatureIT {
 }
 

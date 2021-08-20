@@ -9,10 +9,11 @@ import util.TestContext;
 
 public class ExampleSteps implements En {
     private static final Logger log = LoggerFactory.getLogger(ExampleSteps.class);
-    TestContext testContext;
+    private TestContext testContext;
 
     @Inject
     public ExampleSteps(TestContext testContext) {
+        log.info(String.format("Test context is %s", testContext));
         this.testContext = testContext;
         configureSteps();
     }
@@ -30,19 +31,15 @@ public class ExampleSteps implements En {
             testContext.put("some-key", "some-value");
         });
 
+        Given("^that pre condition$", () -> {
+        });
+
         When("^I do this$", () -> {
         });
 
         When("^I do that$", () -> {
         });
 
-        Then("^I can verify that$", () -> {
-            assert (testContext.get("some-key").get().equals("some-value"));
-        });
-
-        Then("^I can also verify that$", () -> {
-        });
-
     }
-
 }
+
