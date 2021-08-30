@@ -10,6 +10,7 @@ run:
 	 docker run $(IMAGE_NAME):$(IMAGE_TAG)
 run-bash:
 	 docker run -it $(IMAGE_NAME):$(IMAGE_TAG) /bin/bash
+all: dist image
 push:
 	 docker push $(IMAGE_NAME):$(IMAGE_TAG)
 	 docker push $(IMAGE_NAME):latest

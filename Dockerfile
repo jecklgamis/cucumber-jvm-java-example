@@ -1,10 +1,18 @@
 FROM jecklgamis/openjdk-8-jre:latest
 MAINTAINER Jerrico Gamis <jecklgamis@gmail.com>
 
-RUN mkdir -m 0755 -p /cucumber-jvm-java-example
+ENV APP_HOME /app
+RUN mkdir -m 0755 -p ${APP_HOME}
 
-COPY target/cucumber-jvm-java-example.jar /cucumber-jvm-java-example
-COPY docker-entrypoint.sh /cucumber-jvm-java-example
+COPY target/cucumber-jvm-java-example.jar ${APP_HOME}
 
-CMD ["/cucumber-jvm-java-example/docker-entrypoint.sh"]
+RUN groupadd -r app && useradd -r -gapp app
+RUN chown -R app:app ${APP_HOME}
+
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+
+USER app
+WORKDIR ${APP_HOME}
+CMD ["/docker-entrypoint.sh"]
 
