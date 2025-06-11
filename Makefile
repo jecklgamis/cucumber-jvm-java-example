@@ -1,4 +1,4 @@
-IMAGE_NAME:=jecklgamis/cucumber-jvm-java-example
+IMAGE_NAME:=cucumber-jvm-java-example
 IMAGE_TAG:=latest
 default:
 	cat ./Makefile
