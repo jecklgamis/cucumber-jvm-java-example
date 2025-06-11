@@ -4,7 +4,7 @@
 
 This is an example Cucumber-JVM project.
 
-* Uses Java 8 lambda step definitions
+* Uses Java lambda step definitions
 * Packages tests into executable jar file
 * Uses Guice dependency injection
 
