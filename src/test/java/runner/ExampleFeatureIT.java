@@ -1,15 +1,14 @@
 package runner;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
+import org.junit.platform.suite.api.*;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        features = {"classpath:features"},
-        tags = "not @Wip",
-        glue = {"classpath:steps"},
-        plugin = {"pretty", "html:target/cucumber/html"})
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
+
+
+@Suite
+@IncludeEngines("cucumber")
+@SelectPackages("features")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "steps")
+@ConfigurationParametersResource("cucumber.properties")
 public class ExampleFeatureIT {
 }
-

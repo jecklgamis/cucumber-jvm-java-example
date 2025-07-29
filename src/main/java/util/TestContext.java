@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TestContext {
-    private Map<String, Object> context = new HashMap<>();
+    private final Map<String, Object> context = new HashMap<>();
 
     public void put(String key, Object value) {
         context.put(key, value);
