@@ -1,6 +1,6 @@
 ## cucumber-jvm-java-example
 
-[![Build](https://github.com/jecklgamis/cucumber-jvm-java-example/actions/workflows/build.yml/badge.svg)](https://github.com/jecklgamis/cucumber-jvm-java-example/actions/workflows/build.yml)
+[![Build](https://github.com/jecklgamis/cucumber-jvm-java-example/actions/workflows/build.yaml/badge.svg)](https://github.com/jecklgamis/cucumber-jvm-java-example/actions/workflows/build.yaml)
 
 This is an example Cucumber-JVM project.
 
